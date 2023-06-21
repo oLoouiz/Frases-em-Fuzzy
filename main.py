@@ -5,17 +5,17 @@ from skfuzzy import control as ctrl
 import matplotlib.pyplot as plt
 import string
 
-# banco de palavras chave
-
+#banco de palavras chave
 palavras_positivas = ['ótimo', 'excelente', 'incrível', 'fantástico', 'maravilhoso', 'feliz', 'surpreendente', 'amei', 'deliciosa',
                       'sensacional', 'espetacular', 'magnífico', 'encantador', 'excepcional', 'empolgante', 'divertido','notável',
                       'estupendo', 'fabuloso', 'brilhante', 'incrível', 'adorável', 'gratificante', 'impressionante', 'perfeito',
-                      'radiante', 'surpreendente', 'único', 'alegre', 'energizante', 'entusiasmado', 'legal', 'bacana']
+                      'radiante', 'surpreendente', 'único', 'alegre', 'energizante', 'entusiasmado', 'legal', 'bacana', 'maravilhosa',
+                      'aproveitei']
 
 palavras_negativas = ['péssimo', 'horrível', 'terrível', 'desagradável', 'decepcionante', 'triste', 'frustrante', 'ruim', 'grosso',
                       'grosseria', 'desastroso', 'desanimador', 'desprezível', 'insatisfatório', 'desconfortável', 'irritante', 'desagradável',
                       'inaceitável', 'aborrecido', 'injusto', 'lamentável', 'detestável', 'desanimador', 'estressante', 'inferior', 'indesejado',
-                      'incomodo', 'miserável', 'problemático']
+                      'incomodo', 'miserável', 'problemático', 'decepção', 'incompetência']
 
 
 intensificadores = ['muito', 'bastante', 'extremamente', 'incrivelmente', 'realmente', 'completamente', 'absolutamente', 'enormemente', 'imensamente',
@@ -25,7 +25,7 @@ intensificadores = ['muito', 'bastante', 'extremamente', 'incrivelmente', 'realm
 negacoes = ['não', 'jamais', 'nenhum', 'nem', 'nada']
 
 
-# Variáveis fuzzy e funções de pertinência
+#Variáveis fuzzy e funções de pertinência
 fp_range = np.linspace(0, 1, 100)
 fn_range = np.linspace(0, 1, 100)
 i_range = np.linspace(0, 1, 100)
@@ -57,7 +57,7 @@ PS['negativa'] = fuzz.trimf(ps_range, [0, 0, 0.3])
 PS['neutra'] = fuzz.trimf(ps_range, [0.2, 0.4, 0.6])
 PS['positiva'] = fuzz.trimf(ps_range, [0.4, 1, 1])
 
-# Regras fuzzy
+#Regras fuzzy
 regra1 = ctrl.Rule(FP['alta'] | (FP['media'] & ~FN['alta']), PS['positiva'])
 regra2 = ctrl.Rule(FN['alta'] | (FN['media'] & ~FP['alta']), PS['negativa'])
 regra3 = ctrl.Rule((FP['baixa'] | FP['media']) & (FN['baixa'] | FN['media']), PS['neutra'])
